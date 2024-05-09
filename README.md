@@ -6,7 +6,7 @@ This repository showcases a variety of projects demonstrating the integration of
 ## Projects Included
 Here, we describe each project briefly:
 
-- **Project #1**: **Custom eCommerce Recommendation Engine with HubSpot and AWS Personalize**
+- [**Project #1**: **Custom eCommerce Recommendation Engine with HubSpot and AWS Personalize**](https://github.com/hubspotdev/aws-hubspot-integrations/tree/main/hubspot-snowflake-aws-ml-insights)
 
 This project aims to develop a machine learning-powered recommendation engine for e-commerce that integrates with HubSpot. This engine uses AWS Personalize to generate product recommendations based on user behavior and interactions on the HubSpot platform. The primary use case is to enhance the shopping experience by providing personalized product suggestions to users, potentially increasing engagement and sales.
 
