@@ -1,4 +1,4 @@
-# Custom eCommerce Recommendation Engine with HubSpot and AWS Personalize
+# Project #1: Custom eCommerce Recommendation Engine with HubSpot and AWS Personalize
 
 ## Overview
 Unlock the power of personalized marketing and sales experiences with our comprehensive guide on integrating HubSpot’s smart CRM capabilities with AWS Personalize. This repository offers a step-by-step tutorial designed to help you create a powerful product recommendation engine tailored to enhance the customer experience, increase engagement, and boost sales.
