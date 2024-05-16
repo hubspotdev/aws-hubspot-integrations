@@ -1,0 +1,28 @@
+{
+  "name": "Product Recommendations",
+  "description": "This is an example private app that interacts with the AWS Personalize recommendation system via custom objects and products. Refer to the developer blog post for more information.",
+  "uid": "product_recommendation_card",
+  "scopes": [
+    "crm.objects.contacts.read",
+    "crm.objects.contacts.write",
+    "collector.graphql_query.execute",
+    "collector.graphql_schema.read",
+    "crm.objects.custom.read",
+    "crm.objects.custom.write",
+    "crm.objects.deals.read",
+    "crm.objects.deals.write",
+    "e-commerce",
+    "marketing-email",
+    "transactional-email"
+  ],
+  "public": false,
+  "extensions": {
+    "crm": {
+      "cards": [
+        {
+          "file": "extensions/product-recommendations.json"
+        }
+      ]
+    }
+  }
+}

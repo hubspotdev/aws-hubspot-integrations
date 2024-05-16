@@ -1,0 +1,16 @@
+{
+  "appFunctions": {
+    "createDealWithRecs": {
+      "file": "createDealWithRecs.js",
+      "secrets": []
+    },
+    "getNewRecs": {
+      "file": "getNewRecs.js",
+      "secrets": ["PERSONALIZE_API_KEY", "PERSONALIZE_URL"]
+    },
+    "sendRecsEmail": {
+      "file": "sendRecsEmail.js",
+      "secrets": []
+    }
+  }
+}
