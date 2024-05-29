@@ -1,0 +1,45 @@
+{% if is_in_hs_app %}
+  {% set contact_id = module.contact.properties.hs_object_id %}
+{% else %}
+  {% set contact_id = contact.hs_object_id %}
+{% endif %}
+
+{% if contact_id %}
+  {% set associated_recommendations = crm_associations(contact_id, "USER_DEFINED", 18, "orderBy=-hs_createdate&limit=5", "recommended_product_id") %}
+
+  {% for _rec in associated_recommendations.results %}
+      {% set _product = crm_object("product", _rec.recommended_product_id, "name,description,price,category_level_1,category_level_2,hs_images,external_id", false) %}
+      <div  style="text-align:center">
+        {% if _product.hs_images %}
+          <img style="width: 50%" src={{ _product.hs_images }} />
+        {% else %}
+          {% if module.default_image_selector.src %}
+            {% set sizeAttrs = 'width="{{ module.default_image_selector.width|escape_attr }}" height="{{ module.default_image_selector.height|escape_attr }}"' %}
+            {% if module.default_image_selector.size_type == 'auto' %}
+              {% set sizeAttrs = 'width="{{ module.default_image_selector.width|escape_attr }}" height="{{ module.default_image_selector.height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+            {% elif module.default_image_selector.size_type == 'auto_custom_max' %}
+              {% set sizeAttrs = 'width="{{ module.default_image_selector.max_width|escape_attr }}" height="{{ module.default_image_selector.max_height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+            {% endif %}
+             {% set loadingAttr = module.default_image_selector.loading != 'disabled' ? 'loading="{{ module.default_image_selector.loading|escape_attr }}"' : '' %}
+            <img src="{{ module.default_image_selector.src|escape_url }}" alt="{{ module.default_image_selector.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+          {% endif %}
+        {% endif %}
+         <p>
+          <h3>{{ _product.name }} - ${{ _product.price }}</h3><br>{{ _product.description }} <br><br>
+        <a rel="noopener" target="_blank" href="http://23826378.hs-sites.com/e-commerce-profile" style="background-color: #425b76; font-size: 18px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; text-decoration: none; padding: 14px 20px; color: #ffffff; border-radius: 5px; display: inline-block; mso-padding-alt: 0;">
+          <!--[if mso]>
+          <i style="letter-spacing: 25px; mso-font-width: -100%; mso-text-raise: 30pt;">&nbsp;</i>
+          <![endif]-->
+          <span style="mso-text-raise: 15pt;">{{ module.button_text }}</span>
+          <!--[if mso]>
+          <i style="letter-spacing: 25px; mso-font-width: -100%;">&nbsp;</i>
+          <![endif]-->
+        </a>
+         </p>
+         <br>
+         <hr>
+      </div> 
+
+  {% endfor %}
+{% endif %}
+
