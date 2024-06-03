@@ -1,4 +1,6 @@
 /*
+Workflow Custom Coded Action 2: Send Transformed HubSpot Event Completion Data to AWS Personalize as Item Interactions
+
 Notes to make this function run:
 This is the second function in a HubSpot Workflow to get custom recommendations from AWS Personalize.
 
