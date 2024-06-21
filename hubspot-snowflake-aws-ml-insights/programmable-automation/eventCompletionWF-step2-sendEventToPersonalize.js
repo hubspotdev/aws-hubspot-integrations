@@ -8,7 +8,7 @@ Makes an API call to AWS API Gateway to send Interaction data
 
 Inputs:
 Set variables:
-1. AWS API Gateway Path as a HubSpot Workflow Custom Coded Action Secrete and used as environment variable or hardcode
+1. AWS API Gateway Path as a HubSpot Workflow Custom Coded Action Secret and used as environment variable or hardcode
 2. DataSet Group Name from Personalize
 3. AWS API Gateway API Key added as a HubSpot Workflow Custom Coded Action Secrete and used as environment variable
 
@@ -16,8 +16,8 @@ Set input Field from previous HubSpot coded action:
 1. This function expects an input from a previous coded action. 
   The input is a properly formatted input body to send to the AWS API Gateway
 
-  Outputs:
-  Response from AWS API Gateway 
+Outputs:
+  - Response from AWS API Gateway 
 
 */
 var axios = require("axios");
@@ -27,16 +27,16 @@ exports.main = async (event, callback) => {
   console.log(_completionEvent);
 
   //variables to build API Gateway Path to send event completion data to Personalize
-  const _apiGatewayBaseUrl = process.env.apiGatewayBaseUrl;
-  const _personalizeDataSetGroupNamespace = "hubspot_datasetgroup";
-  const _apiGatewayPath = "events";
-  const _numResults = "5";
-  const _apiGatewayApiKey = process.env.personalize_api_gateway_v2;
+  const apiGatewayBaseUrl = process.env.apiGatewayBaseUrl;
+  const personalizeDataSetGroupNamespace = "hubspot_datasetgroup";
+  const apiGatewayPath = "events";
+  const numResults = "5";
+  const apiGatewayApiKey = process.env.personalize_api_gateway_v2;
 
   try {
     let config = {
       method: "post",
-      url: `${_apiGatewayBaseUrl}/${_apiGatewayPath}/${_personalizeDataSetGroupNamespace}?numResults=${_numResults}`,
+      url: `${apiGatewayBaseUrl}/${apiGatewayPath}/${personalizeDataSetGroupNamespace}?numResults=${numResults}`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -44,16 +44,16 @@ exports.main = async (event, callback) => {
     };
 
     axios.defaults.headers.common = {
-      "X-API-Key": _apiGatewayApiKey,
+      "X-API-Key": apiGatewayApiKey,
     };
     axios
       .request(config)
       .then(function (response) {
         console.log("personalize response", JSON.stringify(response.data));
-        var _res = response.data;
+        var res = response.data;
         callback({
           outputFields: {
-            AWSPersonalizeResponse: _res,
+            AWSPersonalizeResponse: res,
           },
         });
       })
