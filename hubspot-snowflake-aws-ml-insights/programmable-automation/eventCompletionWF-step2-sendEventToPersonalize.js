@@ -23,8 +23,8 @@ Outputs:
 var axios = require("axios");
 
 exports.main = async (event, callback) => {
-  const _completionEvent = event.inputFields["CompletionEvent"];
-  console.log(_completionEvent);
+  const completionEvent = event.inputFields["CompletionEvent"];
+  console.log(completionEvent);
 
   //variables to build API Gateway Path to send event completion data to Personalize
   const apiGatewayBaseUrl = process.env.apiGatewayBaseUrl;
@@ -40,7 +40,7 @@ exports.main = async (event, callback) => {
       headers: {
         "Content-Type": "application/json",
       },
-      data: JSON.parse(_completionEvent),
+      data: JSON.parse(completionEvent),
     };
 
     axios.defaults.headers.common = {
