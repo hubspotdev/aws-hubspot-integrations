@@ -1,0 +1,15 @@
+{
+  "type": "crm-card",
+  "data": {
+    "title": "product_recommendation_card",
+    "location": "crm.record.tab",
+    "module": {
+      "file": "Recommendations.jsx"
+    },
+    "objectTypes": [
+      {
+        "name": "contacts"
+      }
+    ]
+  }
+}
