@@ -51,10 +51,10 @@ You can leverage an [AWS free tier](https://aws.amazon.com/free/?nc2=h_ql_pr_ft&
 
 Once you’ve completed the prerequisites, you can begin building a custom eCommerce recommendation engine in two phases: 
 
-1.  **Training Phase**: Prepare Data Model in HubSpot and Connect to Snowflake for data ET
-2.  **Inference Phase** - Generate and Use Recommendations
+1.  [**Training Phase**: Prepare Data Model in HubSpot and Connect to Snowflake for data ET](hubspot-snowflake-aws-ml-insights/development-guide/training-phase.md)
+2.  [**Inference Phase** - Generate and Use Recommendations](hubspot-snowflake-aws-ml-insights/development-guide/inference-phase.md)
 
-If you want to contribute to this project, see CONTRIBUTE.md for more info.
+If you want to contribute to this project, see [CONTRIBUTE.md](hubspot-snowflake-aws-ml-insights/CONTRIBUTE.md) for more info.
 
 ## License
 
