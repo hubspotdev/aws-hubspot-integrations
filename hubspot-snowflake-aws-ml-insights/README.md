@@ -1,57 +1,61 @@
 # Project #1: Custom eCommerce Recommendation Engine with HubSpot and AWS Personalize
 
-## Overview
-Unlock the power of personalized marketing and sales experiences with our comprehensive guide on integrating HubSpot’s smart CRM capabilities with AWS Personalize. This repository offers a step-by-step tutorial designed to help you create a powerful product recommendation engine tailored to enhance the customer experience, increase engagement, and boost sales.
+Unlock the power of personalized marketing and sales experiences with our step-by-step guide on integrating HubSpot’s smart CRM and AWS Personalize.
 
-### Context and Business Value
-In the competitive eCommerce landscape, personalization is key. By implementing a recommendation engine that adapts to individual user behaviors, businesses can significantly enhance customer interactions, driving higher conversion rates and fostering loyalty.
+## Context and Business Value Overview
 
-This solution is ideal for HubSpot customers looking to leverage advanced AI/ML capabilities for personalized product recommendations directly within the HubSpot CRM, accessible by CRM users and through automated email campaigns.
+In today's competitive eCommerce landscape, personalized product recommendations enhance customer experience and boost sales. Businesses can increase engagement, conversion rates, and customer loyalty by tailoring shopping journeys to individual user behavior.
 
-### Solution Architecture
-The architecture provided balances scalability with ease of deployment, suitable for HubSpot Enterprise clients. It involves key AWS services and potentially integrates with Snowflake for enhanced data handling capabilities.
+This guide is for HubSpot prospects or customers looking to create personalized product recommendations. It provides a tutorial for building a proof-of-concept that generates recommendations in HubSpot CRM for use by sales representatives and automated email campaigns. The architecture can be adapted for other AI/ML-powered personalization use cases where HubSpot’s native AI features may not meet Enterprise needs.
 
-## Prerequisites
-- HubSpot CRM with admin permissions (Marketing Hub Enterprise, Sales Hub Enterprise, Operations Hub Enterprise)
-- AWS account with permissions for:
-  - AWS Personalize
-  - AWS S3
-  - AWS API Gateway
-  - AWS Lambda
-- (Optional) Access to Snowflake for using HubSpot’s Operations Hub Enterprise DataShare data
+The solution integrates an AI/ML recommendation engine with [HubSpot's CRM](https://www.hubspot.com/products/crm/what-is) and [AWS Personalize](https://docs.aws.amazon.com/personalize/latest/dg/what-is-personalize.html), balancing scalability and ease of deployment. Configuration in both AWS and HubSpot is required. The article details necessary customizations and discusses alternative architectures.
 
-## Cost Considerations
-Investing in this AI/ML powered solution can significantly boost your marketing and sales metrics. Costs involved include:
-- AWS usage fees (use the [AWS Personalize Cost Calculator](https://aws.amazon.com/personalize/pricing/))
-- HubSpot subscription costs
-- Development expenses
+## Solution Overview
 
-## Getting Started
+To create personalized recommendations in HubSpot for sales representatives and marketing automation campaigns, we’ll follow two phases divided into five high-level steps: Prepare, Train, Create Recommendations, and Use Recommendations.
+  
+**Training Phase - Train the Recommendation Engine**
+*   **Step 1: Prepare Data Model** – Set up the data model in HubSpot and connect it to Snowflake for data ETL.
+*   **Step 2: Train AWS Personalize** – Load HubSpot data into AWS S3 and train the AWS Personalize eCommerce Recommender, then develop APIs to retrieve recommendations and load new user and item interactions.
 
-### Phase 1: Training Phase
-1. **Prepare Data Model**: Set up your data model in HubSpot and connect to Snowflake for data ETL.
-2. **Train Recommender**: Utilize the AWS Personalize to train your eCommerce recommender using data loaded into AWS S3.
+**Inference Phase - Generate and Use Recommendations**
+*   **Step 3: Create HubSpot Assets** – Generate recommendations in HubSpot.
+*   **Step 4: Utilize Recommendations** – Use the recommendations in a HubSpot custom CRM card and in automated email campaigns.
 
-### Phase 2: Inference Phase
-3. **API Integration**: Develop APIs to fetch recommendations and to load new user and item interactions.
-4. **Load and Utilize Recommendations**:
-   - Load the generated recommendations back into HubSpot.
-   - Use these recommendations through a custom CRM card and in automated email campaigns.
+## Architecture
 
-## Deployment
-Detailed steps on deploying this solution, including code snippets and configuration settings, can be found in the respective folders and files of this repository.
+HubSpot eCommerce Recommendation Architecture Overview:
 
-## Contributing
-Contributions to improve the solution are welcome. Please fork the repository, make your changes, and submit a pull request.
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXckPFwNesG-WlGCQyUOxT4cxKG3XjpDk1s56_YWpLHUdbV7qAOFiEGGXcp1v8n0-oKc4RN3-EyDZE6nRQJPK0MVeRESbyKFeB9Al6Gsn9ZECRh6RjSDss-NizqJeq-bQUCLi9kJWhJ6a5y5q73O47IxRjnK?key=tS78N09clEjNowYHDX_Wxw)
 
-## Support
-For support, feature requests, or bug reporting, please open an issue in this repository.
+## Solution Prerequisites
+
+To build this solution, you’ll need the following accounts, services, and tools: 
+
+1.  A [HubSpot account](https://developers.hubspot.com/docs/api/account-types) or a [developer test account](https://developers.hubspot.com/get-started).
+2.  Ensure you can access the HubSpot CRM with Super Admin permissions with Marketing, Sales, or Service Hub Enterprise.
+3.  This tutorial can be leveraged with a HubSpot [sandbox environment](https://developers.hubspot.com/docs/platform/crm-development-tools-overview#development-sandboxes) or production account.
+4.  An [AWS account](https://portal.aws.amazon.com/billing/signup) with the following AWS services:
+5.  Note: When you sign up for an AWS account, an AWS account root user is created. The root user can access all AWS services and resources in the account. Please refer to the AWS ‘[_Onboarding to AWS_](https://aws.amazon.com/getting-started/onboarding-to-aws/set-up-your-account/)’ for more information.
+6.  [AWS Personalize](https://aws.amazon.com/personalize/)
+7.  [Amazon S3](https://aws.amazon.com/s3/)
+8.  [AWS Lambda](https://aws.amazon.com/lambda/) with an [API Gateway](https://aws.amazon.com/api-gateway/)
+
+You can leverage an [AWS free tier](https://aws.amazon.com/free/?nc2=h_ql_pr_ft&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) with different free offers applicable to the services you leverage. However, refer to their [cost calculator](https://calculator.aws/#/createCalculator/personalize) to learn more about AWS Personalize costs. 
+
+1.  A [Snowflake](https://www.snowflake.com/en/) account.
+
+**Note:** You can leverage the free 30-day trial.
+
+## Development Guide
+
+Once you’ve completed the prerequisites, you can begin building a custom eCommerce recommendation engine in two phases: 
+
+1.  [**Training Phase**: Prepare Data Model in HubSpot and Connect to Snowflake for data ET](hubspot-snowflake-aws-ml-insights/development-guide/training-phase.md)
+2.  [**Inference Phase** - Generate and Use Recommendations](hubspot-snowflake-aws-ml-insights/development-guide/inference-phase.md)
+
+If you want to contribute to this project, see [CONTRIBUTE.md](hubspot-snowflake-aws-ml-insights/CONTRIBUTE.md) for more info.
 
 ## License
-[Specify the license under which this project is released]
 
-## Contact Information
-For further assistance or queries, please contact [Your Contact Information].
-
-Thank you for choosing to enhance your eCommerce strategy with our personalized recommendation engine guide!
-
+\[Specify the license under which this project is released\]
