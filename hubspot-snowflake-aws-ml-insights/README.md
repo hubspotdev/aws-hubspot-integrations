@@ -1,4 +1,4 @@
-# Project #1: Custom eCommerce Recommendation Engine with HubSpot and AWS Personalize
+# Project #1: Custom ML Recommendation Engine with HubSpot and AWS
 
 Unlock the power of personalized marketing and sales experiences with our step-by-step guide on integrating HubSpot’s smart CRM and AWS Personalize.
 
@@ -32,30 +32,27 @@ HubSpot eCommerce Recommendation Architecture Overview:
 
 To build this solution, you’ll need the following accounts, services, and tools: 
 
-1.  A [HubSpot account](https://developers.hubspot.com/docs/api/account-types) or a [developer test account](https://developers.hubspot.com/get-started).
-2.  Ensure you can access the HubSpot CRM with Super Admin permissions with Marketing, Sales, or Service Hub Enterprise.
-3.  This tutorial can be leveraged with a HubSpot [sandbox environment](https://developers.hubspot.com/docs/platform/crm-development-tools-overview#development-sandboxes) or production account.
-4.  An [AWS account](https://portal.aws.amazon.com/billing/signup) with the following AWS services:
-5.  Note: When you sign up for an AWS account, an AWS account root user is created. The root user can access all AWS services and resources in the account. Please refer to the AWS ‘[_Onboarding to AWS_](https://aws.amazon.com/getting-started/onboarding-to-aws/set-up-your-account/)’ for more information.
-6.  [AWS Personalize](https://aws.amazon.com/personalize/)
-7.  [Amazon S3](https://aws.amazon.com/s3/)
-8.  [AWS Lambda](https://aws.amazon.com/lambda/) with an [API Gateway](https://aws.amazon.com/api-gateway/)
+*  A [HubSpot account](https://developers.hubspot.com/docs/api/account-types) with an Operations Hub or Sales Hub Enterprise account. Otherwise, a [developer test account](https://developers.hubspot.com/get-started).
+*  Ensure you can access the HubSpot CRM with Super Admin permissions with Marketing, Sales, or Service Hub Enterprise.
+*  This tutorial can be leveraged with a HubSpot [sandbox environment](https://developers.hubspot.com/docs/platform/crm-development-tools-overview#development-sandboxes) or production account.
+*  An [AWS account](https://portal.aws.amazon.com/billing/signup) with the following AWS services:
+*  Note: When you sign up for an AWS account, an AWS account root user is created. The root user can access all AWS services and resources in the account. Please refer to the AWS ‘[_Onboarding to AWS_](https://aws.amazon.com/getting-started/onboarding-to-aws/set-up-your-account/)’ for more information.
+*  [AWS Personalize](https://aws.amazon.com/personalize/)
+*  [Amazon S3](https://aws.amazon.com/s3/)
+*  [AWS Lambda](https://aws.amazon.com/lambda/) with an [API Gateway](https://aws.amazon.com/api-gateway/)
 
-You can leverage an [AWS free tier](https://aws.amazon.com/free/?nc2=h_ql_pr_ft&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) with different free offers applicable to the services you leverage. However, refer to their [cost calculator](https://calculator.aws/#/createCalculator/personalize) to learn more about AWS Personalize costs. 
+Note: You can leverage an [AWS free tier](https://aws.amazon.com/free/?nc2=h_ql_pr_ft&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) with different free offers applicable to the services you leverage. However, implementing this solution requires an upfront investment with AWS for hosting, storage, and API usage. Use their [cost calculator](https://calculator.aws/#/createCalculator/personalize) to learn more about AWS Personalize costs so you can budget effectively and plan for the impact of higher engagement, improved conversions, and increased revenue. 
 
-1.  A [Snowflake](https://www.snowflake.com/en/) account.
+*  A [Snowflake](https://www.snowflake.com/en/) account.
 
 **Note:** You can leverage the free 30-day trial.
 
 ## Development Guide
 
-Once you’ve completed the prerequisites, you can begin building a custom eCommerce recommendation engine in two phases: 
+Once you’ve completed the prerequisites, you can begin building a custom B2C recommendation engine in two phases: 
 
-1.  [**Training Phase**: Prepare Data Model in HubSpot and Connect to Snowflake for data ET](hubspot-snowflake-aws-ml-insights/development-guide/training-phase.md)
-2.  [**Inference Phase** - Generate and Use Recommendations](hubspot-snowflake-aws-ml-insights/development-guide/inference-phase.md)
+1.  [**Training Phase**: Prepare Data Model & Sample Training Data and Train AWS Personalize](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/development-guide/training-phase.md)
+2.  [**Inference Phase**: Create HubSpot Assets and Utilize Recommendations](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/development-guide/inference-phase.md)
 
-If you want to contribute to this project, see [CONTRIBUTE.md](hubspot-snowflake-aws-ml-insights/CONTRIBUTE.md) for more info.
+If you want to contribute to this project, see [CONTRIBUTE.md](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/CONTRIBUTE.md) for more info.
 
-## License
-
-\[Specify the license under which this project is released\]
