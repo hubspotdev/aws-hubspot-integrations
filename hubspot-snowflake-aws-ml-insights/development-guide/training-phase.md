@@ -29,7 +29,7 @@ In this tutorial, we model HubSpot data using a blended approach:
 *   Users: HubSpot Contacts (CRM Object)
 *   Interactions:
      * Custom Event: "View" and "Add to Cart"
-     * Deals: CRM Object where the stage “Closed Won” represents a purchased item
+     * Deals: CRM Object where the stage “Checkout Completed” ("Closed Won") represents a purchased item
 
   
 
@@ -72,16 +72,15 @@ Contact Properties: 
 
 Custom Events and Properties: 
 
-*   Create Custom Events (e.g., View, Add to Cart)
-*   Import event completions using Javascript
-     * See Import Event Completions example, below: 
+*   Create Custom Events Definition (e.g., View, Add to Cart)
+     * Import Events via CSV - it is recommended to import one or more rows of [sample data](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/postman/custom-event-interactions-set-1.csv) to set up your Custom Event. If the Custom Event Definition is created via API then a CSV Import will not be supported.
 
 Deal Properties: 
 
 *   Add Single-Line Text property:
      * Cart Discount
 
-#### Import Data
+#### Import Data via HubSpot CSV Import
 
 **Products:**
 
@@ -128,7 +127,13 @@ Deal Properties: 
 
 **Event Completions:**
 
-*   Prepare Interactions CSV/XLS file 
+*   Prepare Interactions CSV/XLS file
+    *   In order to map the Custom Event Completions to a HubSpot Contact record the import file requires a column called Contact ID with a valid Contact record ID. The steps below will help prepare your import file with the Contact ID column.
+        *   Export a list of Contacts with columns ID and External ID where External ID is not blank to a new Microsoft Excel Worksheet
+        *   Convert the interactions CSV file as a Microsoft Excel Worksheet and use existing Contact ID column
+        *   Copy the contents of the Contact export into a new worksheet within the same Excel file above
+        *   Create a lookup for Contact ID in the interactions worksheet which pulls the HubSpot Contact ID from the Contacts worksheet where Contact External ID matches the interactions Users ID
+     
 *   Import events referencing the [HubSpot Knowledge Base article](https://knowledge.hubspot.com/reports/create-custom-behavioral-events-with-the-code-wizard#import-event-data)
 *   Map relevant properties:
     *   Details
@@ -157,24 +162,17 @@ Deal Properties: 
 
 **Deals:**
 
-**Deals with ‘Added Cart’ Discount:**
+**Deals with ‘Add to Cart’ Data:**
 
-*   Export Products and Contacts
-    *   Export Products to get the HubSpot Product ID. 
-    *   Include \`Item\_ID\`
-*   Export Contacts to get the HubSpot Contact ID.
-    *   Include \`External\_ID\`.
-
-Prepare Deal Data:
-
-*   Create a CSV/XLS file with the following columns for Deals:
-    * \`Contact ID\` (match with \`User\_ID\`)
-    * \`Product ID\` (match with \`Item\_ID\`)
-    * \`Deal Name\` (e.g., Product Name + other identifier)
-    * \`Deal Pipeline\` (set to "eCommerce")
-    * \`Deal Stage\` (set to "Checkout Pending")
-    * \`Quantity\` (set to "1")
-    * \`Deal Amount\` (match with \`Item\_Price\`)*
+*   Export Products
+    *   Export a list of Products with columns ID and External ID where External ID is not blank to a new Microsoft Excel Worksheet 
+*   Export Contacts
+    *   Export a list of Contacts with columns ID and External ID where External ID is not blank to a new Microsoft Excel Worksheet
+*   Prepare Deal Import File
+    *   Convert the Deals Checkout Pending CSV file as a Microsoft Excel Worksheet and use existing Product ID and Contact ID columns
+    *   Copy the contents of the Product and Contact export into new worksheets within the same Excel file above
+    *   Create a lookup for Contact ID in the Deals worksheet which pulls the HubSpot Contact ID from the Contacts worksheet where Contact External ID matches the Deals Users ID
+    *   Create a lookup for Product ID in the Deals worksheet which pulls the HubSpot Product ID from the Products worksheet where Product External ID matches the Deals Item ID
 
 Import Deal Data:
 
@@ -202,10 +200,21 @@ Import Deal Data:
 
 **Deals with Purchase Data:**
 
-*   Export Deals that were uploaded as "Added to Cart" to get the HubSpot Deal ID.
-*   Prepare a CSV/XLS file with the following columns for Deals:
-    * \`Deal ID\` (to update Deals from "Checkout Pending" to "Checkout Completed")
-    * \`Deal Stage\` (set to "Checkout Completed")
+*   Export Deals
+    *   Export a list of Deals from HubSpot where Stage = Checkout Pending that were created in the "Add to Cart" process. Include the Deal ID, Name, Associated Contact ID.
+    *   Export the Deals to a new Microsoft Excel Worksheet 
+*   Export Contacts
+    *   Export a list of Contacts with columns ID and External ID where External ID is not blank to a new Microsoft Excel Worksheet
+*   Prepare Deal Import File
+    *   Convert the Deals Checkout Completed CSV file as a Microsoft Excel Worksheet and use the existing Contact ID column
+    *   Copy the contents of the Contact export into new worksheets within the same Excel file above
+    *   Create a lookup for Contact ID in the Deals Checkout Completed worksheet which pulls the HubSpot Contact ID from the Contacts worksheet where Contact External ID matches the Deals Users ID
+    *   Create a new column within your Deals Checkout Completed worksheet called “Deal Name” = Item Name + " " + Contact ID
+    *   Copy the contents of the Deals Checkout Pending export into new worksheets within the Deal Checkout Completed file
+    *   Create a new column within your Deals Checkout Pending worksheet called “Deal Name” = Deal Name + " " + Contact ID
+    *   Create a Deal ID column within the Deals Checkout Completed worksheet which will be populated from the Deal ID in the Deal Checkout Pending worksheet based on the common lookup of Deal Name
+    *   Use the Deal ID as the primary lookup to update existing HubSpot Deals to Checkout Completed.
+
 *   Go to Deals in HubSpot and select Import.
 *   Choose "One file" and "One object".
 *   Select "Deals".
