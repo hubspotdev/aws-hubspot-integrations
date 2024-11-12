@@ -35,13 +35,17 @@ In this tutorial, we model HubSpot data using a blended approach:
 
 This structure allows seamless integration with AWS Personalize, providing the necessary data for accurate recommendations.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfyf5ZOnmtJdHxNWbZacL0v2jay3EEVCN6d2rZdJgCUeh-h8-xwse6drpOR2C5KYz8EAuMd3mzH6IST2T4pLhYzPEN69r8iEJDmev8uBnHGv2YhynOwJmgxhbY-i8nUvxMLcqEPDIt7kKRP27FcpOBB9ojw?key=tS78N09clEjNowYHDX_Wxw)
+![](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/images/HubSpotDataModel.png)
 
 Data Model that maps HubSpot Objects + Events to AWS Personalize Data.
 
 ## Detailed Instructions
 
 ### Step 1: Prepare Data Model in HubSpot
+
+Data preparation flow to stage training data in HubSpot that can be exported through Snowflake into AWS
+
+![](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/images/DataPrepForHS.png)
 
 *   Download Sample Data or Use Your Own Data
 *   Log in to HubSpot: Ensure you have admin access
@@ -229,6 +233,14 @@ Import Deal Data:
   
 
 ### Step 2: Train AWS Personalize: Run ETL to Export Data to AWS S3
+
+Data flow from HubSpot CRM to AWS through Snowflake
+
+![](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/images/DataTransformationFromHSToAWS.png)
+
+Schema mapping between HubSpot CRM and AWS Personalize
+
+![](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/images/HubSpotCRMAWSPersonalizeDataMapping.png)
 
 *   Enable Operations Hub Enterprise [Snowflake Data Share](https://knowledge.hubspot.com/reports/connect-snowflake-data-share)
     * **Note:** If your HubSpot Account does not have access to Operations Hub Enterprise, connect with your HubSpot Customer Success Manager, Account Executive, or [enable a trial](https://www.hubspot.com/products/operations).
