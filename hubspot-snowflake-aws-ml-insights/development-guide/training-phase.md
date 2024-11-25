@@ -234,24 +234,19 @@ Import Deal Data:
 
 ### Step 2: Train AWS Personalize: Run ETL to Export Data to AWS S3
 
-Data flow from HubSpot CRM to AWS through Snowflake
-
-![](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/images/DataTransformationFromHSToAWS.png)
+For the AWS Personalize Training Phase we use Snowflake to export data to AWS S3. The steps below help you configure your HubSpot Snowflake integration and run queries to export HubSpot CRM and Event data from Snowflake to AWS S3. If Snowflake is not part of your technology stack and you wish to continue with the AWS Personalize Training Phase, you can utilize the [CSV data files](https://203693.fs1.hubspotusercontent-na1.net/hubfs/203693/hubspot-aws-personalize-training-data.zip) and skip to the “Launch AWS Personalize MLOps Stack” step below.
 
 Schema mapping between HubSpot CRM and AWS Personalize
 
 ![](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/images/HubSpotCRMAWSPersonalizeDataMapping.png)
 
+Data flow from HubSpot CRM to AWS through Snowflake
+
+![](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/images/DataTransformationFromHSToAWS.png)
+
+
 *   Enable Operations Hub Enterprise [Snowflake Data Share](https://knowledge.hubspot.com/reports/connect-snowflake-data-share)
     * **Note:** If your HubSpot Account does not have access to Operations Hub Enterprise, connect with your HubSpot Customer Success Manager, Account Executive, or [enable a trial](https://www.hubspot.com/products/operations).
-*   Configure Snowflake
-    *   Set up Snowflake to [unload data to S3](https://docs.snowflake.com/en/user-guide/data-unload-s3)
-    *   Create and Test Queries
-        *   Modify queries for your data warehouse and HubSpot portal
-    *   Create [IAM user](https://aws.amazon.com/iam/getting-started/) in AWS and set appropriate permissions
-        *   Setup the following permissions after you’ve created your IAM user:
-            *   Security Credentials > Create new Access Key. Copy the Access Key ID and Secret Key (treat these keys safely!)
-            *   Add a permission policy to the user that grants access to S3 - this can be done using an AWS-managed S3FullAccess policy or by creating a new policy that grants access to specific S3 buckets
 
 #### Launch AWS Personalize MLOps Stack
 
@@ -263,13 +258,23 @@ Schema mapping between HubSpot CRM and AWS Personalize
 *   Wait for Stack Creation
     *   The stack creation takes a few minutes
     *   Once completed (status: CREATE\_COMPLETE), note the CloudWatch Dashboard and PersonalizeBucketName from the stack outputs
+*   Configure Snowflake (if using Snowflake to export data to AWS S3)
+    *   Set up Snowflake to [unload data to S3](https://docs.snowflake.com/en/user-guide/data-unload-s3)
+    *   Create and Test Queries
+        *   Modify queries for your data warehouse and HubSpot portal
+        *   Modify your Snowflake queries to point to the new S3 bucket: s3://<personalize\_bucket\_name>/train/{file\_name.csv}/
+    *   Create [IAM user](https://aws.amazon.com/iam/getting-started/) in AWS and set appropriate permissions
+        *   Setup the following permissions after you’ve created your IAM user:
+            *   Security Credentials > Create new Access Key. Copy the Access Key ID and Secret Key (treat these keys safely!)
+            *   Add a permission policy to the user that grants access to S3 - this can be done using an AWS-managed S3FullAccess policy or by creating a new policy that grants access to specific S3 buckets
 *   Upload Personalize Datasets
     *   Upload your sample customer datasets (CSV format) and configuration file (JSON form [https://203693.fs1.hubspotusercontent-na1.net/hubfs/203693/config.json](https://203693.fs1.hubspotusercontent-na1.net/hubfs/203693/config.json)at) to the Personalize Bucket
+    *   Export Data from HubSpot to AWS S3. Use either Snowflake or Sample CSV Files
+        *   Snowflake - execute queries from the "Configure Snowflake" step above
+        *   Sample CSV - upload [CSV data files](https://203693.fs1.hubspotusercontent-na1.net/hubfs/203693/hubspot-aws-personalize-training-data.zip)
     *   Example files:
-        *   Interactions, items, and users in CSV format
-        *   Data schema, event tracker, and e-commerce recommender configuration in JSON format
-*   Update Snowflake Queries
-    *    Modify your Snowflake queries to point to the new S3 bucket: s3://<personalize\_bucket\_name>/train/{file\_name.csv}/
+        *   Interactions, Items, and Users in CSV format
+        *   Data schema, event tracker, and e-commerce recommender configuration in JSON format 
 *   Upload Personalize Config
     *   Download the Personalize config
     *   Upload it to the S3 bucket created by the stack
