@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The foundation of a successful recommendation engine lies in the quality of data preparation. This tutorial uses HubSpot's Snowflake Data Share to facilitate data export and integration with AWS Personalize. This method allows for seamless transfer of structured interaction data from HubSpot, minimizing the use of the HubSpot REST API and accelerating development time while ensuring access to up-to-date user behavior for accurate personalization.
+The foundation of a successful recommendation engine lies in the quality of data preparation. This tutorial uses HubSpot's Snowflake Data Share to facilitate data export and integration with Amazon Personalize. This method allows for seamless transfer of structured interaction data from HubSpot, minimizing the use of the HubSpot REST API and accelerating development time while ensuring access to up-to-date user behavior for accurate personalization.
 
 ## Tutorial Overview
 
@@ -13,9 +13,9 @@ To prepare the data, you’ll follow these two steps within the first phase of t
 
   
 
-#### Data Representation for AWS Personalize
+#### Data Representation for Amazon Personalize
 
-For deploying an eCommerce recommender system with AWS Personalize, we need to represent the data as follows:
+For deploying an eCommerce recommender system with Amazon Personalize, we need to represent the data as follows:
 
 *   Items: The products sold in the eCommerce store
 *   Users: The visitors and customers to the eCommerce store
@@ -33,11 +33,11 @@ In this tutorial, we model HubSpot data using a blended approach:
 
   
 
-This structure allows seamless integration with AWS Personalize, providing the necessary data for accurate recommendations.
+This structure allows seamless integration with Amazon Personalize, providing the necessary data for accurate recommendations.
 
 ![](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/images/HubSpotDataModel.png)
 
-Data Model that maps HubSpot Objects + Events to AWS Personalize Data.
+Data Model that maps HubSpot Objects + Events to Amazon Personalize Data.
 
 ## Detailed Instructions
 
@@ -232,11 +232,11 @@ Import Deal Data:
 
   
 
-### Step 2: Train AWS Personalize: Run ETL to Export Data to AWS S3
+### Step 2: Train Amazon Personalize: Run ETL to Export Data to AWS S3
 
-For the AWS Personalize Training Phase we use Snowflake to export data to AWS S3. The steps below help you configure your HubSpot Snowflake integration and run queries to export HubSpot CRM and Event data from Snowflake to AWS S3. If Snowflake is not part of your technology stack and you wish to continue with the AWS Personalize Training Phase, you can utilize the [CSV data files](https://203693.fs1.hubspotusercontent-na1.net/hubfs/203693/hubspot-aws-personalize-training-data.zip) and skip to the “Launch AWS Personalize MLOps Stack” step below.
+For the Amazon Personalize Training Phase we use Snowflake to export data to AWS S3. The steps below help you configure your HubSpot Snowflake integration and run queries to export HubSpot CRM and Event data from Snowflake to AWS S3. If Snowflake is not part of your technology stack and you wish to continue with the Amazon Personalize Training Phase, you can utilize the [CSV data files](https://203693.fs1.hubspotusercontent-na1.net/hubfs/203693/hubspot-aws-personalize-training-data.zip) and skip to the “Launch Amazon Personalize MLOps Stack” step below.
 
-Schema mapping between HubSpot CRM and AWS Personalize
+Schema mapping between HubSpot CRM and Amazon Personalize
 
 ![](https://github.com/hubspotdev/aws-hubspot-integrations/blob/main/hubspot-snowflake-aws-ml-insights/assets/images/HubSpotCRMAWSPersonalizeDataMapping.png)
 
@@ -248,7 +248,7 @@ Data flow from HubSpot CRM to AWS through Snowflake
 *   Enable Operations Hub Enterprise [Snowflake Data Share](https://knowledge.hubspot.com/reports/connect-snowflake-data-share)
     * **Note:** If your HubSpot Account does not have access to Operations Hub Enterprise, connect with your HubSpot Customer Success Manager, Account Executive, or [enable a trial](https://www.hubspot.com/products/operations).
 
-#### Launch AWS Personalize MLOps Stack
+#### Launch Amazon Personalize MLOps Stack
 
 *   [Create the Stack](https://docs.aws.amazon.com/solutions/latest/maintaining-personalized-experiences-with-ml/step-1.-launch-the-stack.html)
     *   Go to AWS Solution: [Maintaining Personalized Experiences with Machine Learning](https://aws.amazon.com/solutions/implementations/maintaining-personalized-experiences-with-ml/)
@@ -279,7 +279,7 @@ Data flow from HubSpot CRM to AWS through Snowflake
     *   Download the Personalize config
     *   Upload it to the S3 bucket created by the stack
     *   The model training will begin using the provided datasets and can take a few hours (go grab a snack!)
-    *   Check the training status in the AWS Personalize Data Set UI
+    *   Check the training status in the Amazon Personalize Data Set UI
 *   Create Personalize APIs
     *   Launch the [Real-Time API CloudFormation](https://github.com/aws-samples/personalization-apis/blob/main/README.md#option-1-install-using-cloudformation-single-click-easiest) stack to create APIs
     *   These APIs will enable programmatic interaction with the Personalize Recommenders and be used in HubSpot automated workflows

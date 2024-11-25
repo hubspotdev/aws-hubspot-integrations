@@ -1,6 +1,6 @@
 # HubSpot Getting Started Project Template
 
-This is the Getting Started project for HubSpot developer projects. It contains a private app, a CRM card written in React, and a serverless function that the CRM card is able to interact with. This code is intended to help developers get up and running with developer projects quickly and easily.
+This is the Getting Started project for HubSpot developer projects. It contains a private app, a app card written in React, and a serverless function that the app card is able to interact with. This code is intended to help developers get up and running with developer projects quickly and easily.
 
 ## Requirements
 

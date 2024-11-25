@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Once the AWS Personalize model is operational, you can start generating and using recommendations within HubSpot. This involves adding new item interactions and users to the system and obtaining personalized suggestions for each user. These recommendations can be utilized in two key ways within HubSpot:
+Once the Amazon Personalize model is operational, you can start generating and using recommendations within HubSpot. This involves adding new item interactions and users to the system and obtaining personalized suggestions for each user. These recommendations can be utilized in two key ways within HubSpot:
 
 - **Step 3: Automating emails** that include personalized product recommendations.
 - **Step 4: Creating a custom CRM card UI extension** within the smart CRM, allowing for manual generation and viewing of recommendations.
